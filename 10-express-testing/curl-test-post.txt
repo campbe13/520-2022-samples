@@ -1,0 +1,36 @@
+
+# instructions
+# node start
+#
+# load dev tools in same browser as a previous fetch 
+#   (needed for the allow origin)
+#
+# paste in the fetch
+# will log whole response
+#
+# uncomment the //.then to log the response
+
+fetch('http://localhost:3029/', {
+  method: 'POST',
+  body: JSON.stringify({
+    title: 'dummy body',
+    body: 'this is ignored'
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8; Access-Control-Allow-Origin: http://localhost:3009/'
+  }
+})
+//.then(res => res.text())  un comment to log the response
+.then(console.log)   
+.catch(console.log)
+
+# use curl at a bash cmd line
+curl -X POST -H "Content-Type: application/json" \
+    -d '{ title: 'dummy body', body: 'this is ignored' }' \
+    http://localhost:3029/api?name=blah
+
+curl http://localhost:3029/api/?name=blah
+
+curl -X POST -H "Content-Type: application/json"  \
+   -d '{ name: 'gonzo' }'   \
+     http://localhost:3029/api/addname

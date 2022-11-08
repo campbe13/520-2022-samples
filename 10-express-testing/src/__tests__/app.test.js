@@ -30,7 +30,6 @@ describe ("GET /api/?xyzname=Fozzie", () => {
     expect(resp.statusCode).toBe(404)
   });
 });
-
 describe("POST /api/addname ", () => {
   test("It should respond with 201", async () => {
     //data not really needed
@@ -39,5 +38,13 @@ describe("POST /api/addname ", () => {
     };
     const response = await request(app).post("/api/addname").send(data);
     expect(response.statusCode).toBe(201);
+  });
+});
+describe("GET /api/addname/gonzo ", () => {
+  test("It should respond with 201", async () => {
+    let result  = { message: "Hello gonzo"}
+    const response = await request(app).post("/api/addname/gonzo");
+    expect(response.statusCode).toBe(201);
+    expect(resp.body).toEqual(result)
   });
 });

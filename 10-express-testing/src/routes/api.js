@@ -8,10 +8,29 @@
 */
 import express from "express"
 const router = express.Router();
-function addname (req, res) {
+// required for post data !!
+router.use(express.json());
+router.use(express.urlencoded({ extended: true })); 
+
+function addnamepost(req, res) {
   // stub
-  console.log(req.body)
-  res.status(201).json({ message: "added"})
+  console.log("addnamepost")
+  //console.log("addname " + req.body)
+  if ("name" in req.body) {
+    res.status(201).json({ message: "added " + req.body.name })
+  } else {
+    res.status(400).json({ error: "no name given "})
+  }
+}
+
+function addnameget(req, res) {
+  // stub
+  if ("name" in req.params) {
+    console.log("addnameget " + req.params.name)
+    res.status(201).json({ message: "added " + req.params.name })
+  } else {
+    res.status(400).json({ error: "no name " })
+  }
 }
 /** 
 * check the request 
@@ -21,13 +40,14 @@ function addname (req, res) {
 * change to 201 ??
  */
 
-function checkname (req, res) {
+function checkname(req, res) {
   /* 
   fix */
   if ('name' in req.query && req.query.name) {
     res.json({ message: "Hello " + req.query.name })
-  } 
-  res.status(404).json({ error: "not supported" })
+  } else {
+    res.status(404).json({ error: "not supported" })
+  }
 }
 
 /* 
@@ -39,7 +59,10 @@ function checkname (req, res) {
   }
   name= will return 200 / name=
 */
-router.post("/addname", (req, res) => addname(req, res))
+router.get("/addname/:name", (req, res) => addnameget(req, res))
+
+router.post("/addname", (req, res) => addnamepost(req, res))
+
 router.get("/", (req, res) => checkname(req, res))
 
 // because I export as default, can name it anything on import
