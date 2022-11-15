@@ -1,0 +1,18 @@
+const app = require("../app");
+const DB = require("../db/db");
+const port = process.env.PORT || 3000;
+
+//only start listening after connection in place
+
+(async () => {
+  try {
+    const db = new DB();
+    await db.connect("lab12", "quotes");
+  } catch (e) {
+    console.error("could not connect");
+    process.exit();
+  }
+  app.listen(port, () => {
+    console.log(`Server listening on port ${port}!`);
+  });
+})();

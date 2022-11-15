@@ -25,15 +25,17 @@ let db
 })();
 // put code here to not continue if error in ^^ db connect
 (async () => {
+
   // connect to collection (create if does not exist)
   const collection = await db.collection("mupps");
-  // read
-  let projection = { name: 1, "personal.age": 2 }
-  const cursor = collection.find().project(projection)
-  const array = await cursor.toArray()
-  //console.log("array " + array)
-  // console.log("read " + array.count) ?? undefined
-  array.forEach(item => console.log(item))
-
+  // const query = {};
+  // sort in descending (-1) order by length
+  const sort = { length: -1 };
+  // show max x records
+  const limit = 3; 
+  // skip x records 
+  const skip = 2;  
+  const cursor = collection.find({}).sort(sort).limit(limit).skip(skip);
+  await cursor.forEach(console.dir);
   client.close();
 })();

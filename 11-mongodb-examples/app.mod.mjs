@@ -5,33 +5,39 @@
 import dotenv from "dotenv"
 import { MongoClient } from "mongodb"
 dotenv.config()
-const dbUrl = process.env.ATLAS_URI;
-// console.log(dbUrl)
-const client = new MongoClient(dbUrl);
-// if you get a timeout you might be missing the IP addr in mongo access list
-await client.connect();
-console.log("client connected")
+let db
+(async () => {
+  try {
+    // connect to server
+    const client = new MongoClient(dbUri);
+    await client.connect();
+    console.log("client connected")
 
-// connect to db (create if does not exist)
-const db = client.db("demo");
-console.log("client.db ")
+    // connect to db (create if does not exist)
+    db = await client.db("demo").command({ ping: 1 })
+    console.log("client.db connected ")
+  } catch (e) {
+    console.log(e)
+  }
+})();
+// put code here to not continue if error in ^^ db connect
+(async () => {
+  // connect to collection (create if does not exist)
+  const collection = await db.collection("mupps");
+  // read
 
+  const cursor = await collection.find()
+  const array = await cursor.toArray()
+  //console.log("array " + array)
+  // console.log("read " + array.count) ?? undefined
+  array.forEach(item => console.log(item))
 
-// connect to collection (create if does not exist)
-const collection = await db.collection("mupps");
-// read
+  let query = { "personal.age": { $gt: 10 } };
+  const older = await collection.find(query)
+  console.log("after query age > 10  ")
+  const olderarray = await older.toArray()
+  // console.log("read " + olderarray.count) ?? undefined
+  olderarray.forEach(item => console.log(item))
 
-const cursor = await collection.find()
-const array    = await cursor.toArray()
-//console.log("array " + array)
-// console.log("read " + array.count) ?? undefined
-array.forEach( item => console.log(item))
-
-let query = { "personal.age" : { $gt : 10 }}  ;
-const  older = await collection.find(query) 
-console.log("after query ")
-const olderarray = await older.toArray()
-// console.log("read " + olderarray.count) ?? undefined
-olderarray.forEach( item => console.log(item))
-
-client.close();
+  client.close();
+})();

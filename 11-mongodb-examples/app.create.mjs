@@ -1,34 +1,41 @@
-import { gonzo, mupparray } from "./muppets.mjs"
 import dotenv from "dotenv"
 import { MongoClient } from "mongodb"
 dotenv.config()
-const dbUrl = process.env.ATLAS_URI;
+const dbUri = process.env.ATLAS_URI;
+let db
 // console.log(dbUrl)
-const client = new MongoClient(dbUrl);
+
 // if you get a timeout you might be missing the IP addr in mongo access list
-await client.connect();
-console.log("client connected")
+(async () => {
+  try {
+    // connect to server
+    const client = new MongoClient(dbUri);
+    await client.connect();
+    console.log("client connected")
 
-// connect to db (create if does not exist)
-const db = client.db("demo");
-console.log("client.db ")
+    // connect to db (create if does not exist)
+    db = await client.db("demo").command({ ping: 1 })
+    console.log("client.db connected ")
+  } catch (e) {
+    console.log(e)
+  }
+})();
+// put code here to not continue if error in ^^ db connect
+(async () => {
 
 
-// connect to collection (create if does not exist)
-let collection = await db.collection("mupps");
-console.log("db.collection ")
+  await db.dropCollection("simple");
 
-let id = await collection.insertOne(gonzo)
-console.log(id)
+  // simple 
+  collection = await db.collection("simple");
+  const one = { name: "gonzo" }
+  const array = [{ name: "animal" }, { name: "kermit" }, { name: "fozzie" }]
+  const id = await collection.insertOne(one)
+  console.log(id)
 
-let result = await collection.insertMany(mupparray)
-console.log(result)
-console.log(result.insertedCount)
-// simple 
-collection = await db.collection("simple");
-const one = { name: "gonzo"}
-const array  = [ { name: "gonzo"}, { name: "kermit"}, { name: "fozzie"} ]
-id = await collection.insertOne(one)
-result = await collection.insertMany(array)
+  const result = await collection.insertMany(array)
+  console.log(result)
+  console.log(result.insertedCount)
 
-client.close();
+  client.close();
+})();
