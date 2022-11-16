@@ -11,7 +11,7 @@
   },
 
   "parserOptions": {
-      "ecmaVersion": 8,
+      "ecmaVersion": "latest",
       "sourceType": "module"
   },
 
@@ -25,7 +25,7 @@
     "block-scoped-var": "warn",
     "curly": "warn",
     "default-case": "warn",
-    "dot-location": ["warn", "object"],
+    //"dot-location": ["warn", "object"],
     "eqeqeq": "warn",
     "no-alert": "warn",
     "no-eq-null": "warn",
