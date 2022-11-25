@@ -1,14 +1,21 @@
+import React, { useState } from 'react'
 import FilterButton from './components/FilterButton';
 import Form from './components/Form';
 import Todo from './components/Todo'
 
 
 function App(props) {
+  const [tasks, setTasks] = useState(props.tasks);
+  
   function addTask(name) {
-    alert(name)
+    //alert(name)  // 1. proof of concept
+    const newTask = { id: "new id", name, completed: false };
+    setTasks([...tasks, newTask]);
   }
-  const tasks = props.tasks.map(task => 
+  // const taskstodo = props.tasks.map(task => 
+  const taskstodo = tasks.map(task => 
     (<Todo id={task.id} name={task.name} completed={task.completed} key={task.id}/>)) 
+
   return (
     <div className="todoapp stack-large">
       <h1>TodoMatic</h1>
@@ -25,7 +32,7 @@ function App(props) {
         className="todo-list stack-large stack-exception"
         aria-labelledby="list-heading"
       >
-        {tasks}
+        {taskstodo}
       </ul>     
     </div>
   );
