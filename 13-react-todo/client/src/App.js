@@ -2,7 +2,7 @@ import FilterButton from './components/FilterButton';
 import Form from './components/Form';
 import Todo from './components/Todo'
 
-/*
+
 function App(props) {
   function addTask(name) {
     alert(name)
@@ -29,7 +29,8 @@ function App(props) {
       </ul>     
     </div>
   );
-  */
+}
+  /*
   function App(props) {
   return (
     <div className="todoapp stack-large">
@@ -128,6 +129,6 @@ function App(props) {
     </div>
   );
 }
-
+*/
 
 export default App;

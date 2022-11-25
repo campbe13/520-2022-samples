@@ -34,8 +34,15 @@ Now you're ready to create components
   <Todo id={task.id} name={task.name} completed={task.completed} key={task.id} />
   // use {tasks}  in the render()
   ```
-));
-
-
 2. create a Form component, have it return the <form>, replace the form with <Form /> 
 3. create a FilterButton component, have it return the <button>, replace the form with <Form /> 
+4. event handling in form `  <form onSubmit={handleSubmit}>` 
+  5. add func
+  ```
+  function Form(props) {
+  function handleSubmit(e) {
+    e.preventDefault()
+    props.addTask("hello")
+
+  }
+  ```   
