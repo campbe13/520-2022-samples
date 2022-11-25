@@ -26,7 +26,7 @@ The above is in the [repo](https://github.com/campbe13/react-starter)
   * replace the `<li>`s with `<Todo />`
     *   `<Todo name="Eat" completed={true} id="todo-0" key="todo-0" />`
   * be sure to export the component & include in App
-  * (optional use an array of Todos to create 
+  * use an array of Todos to create 
   ```
   const TASKSLIST = [
     { id: "todo-0", name: "Eat", completed: true },
@@ -75,7 +75,7 @@ The above is in the [repo](https://github.com/campbe13/react-starter)
     ```
   1. add to App @ top  `const [tasks, setTasks] = useState(props.tasks);`
   1. in App change `  const taskstodo = props.tasks.map(task => `  to `  const taskstodo = tasks.map(task => `
-  1. in Appchange `addTask`
+  1. in Appchange `addTask`   fake id needs to be unique instead use https://github.com/ai/nanoid
     ```
     function addTask(name) {
       const newTask = { id: "id", name, completed: false };

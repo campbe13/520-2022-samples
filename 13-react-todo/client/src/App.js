@@ -9,8 +9,9 @@ function App(props) {
 
   function addTask(name) {
     //alert(name)  // 1. proof of concept
-    // note id/key needs to be unique, can use 
-    const newTask = { id: "new id", name, completed: false };
+    // note id/key needs to be unique, can use nanoid for example https://github.com/ai/nanoid
+    const newTask = { id: "ne", name, completed: false };
+    // spread syntax ...tasks  
     setTasks([...tasks, newTask]);
   }
   // const taskstodo = props.tasks.map(task => 
