@@ -20,7 +20,6 @@ Setup Instructions
 Now you're ready to create components.
 
 The above is in the [repo](https://github.com/campbe13/react-starter)
-
 1. create a Todo component, `components/Todo.js`  
   * have it return the `<li>` code
   * modify to use props for _name_, _complete_ (ticked/not), _id_ and React needs a unique _key_
@@ -34,12 +33,13 @@ The above is in the [repo](https://github.com/campbe13/react-starter)
     { id: "todo-1", name: "Sleep", completed: false },
     { id: "todo-2", name: "Repeat", completed: false }
     ];
-  const tasks = props.tasks.map((task) => (
+  const taskstodo = props.tasks.map((task) => (
   <Todo id={task.id} name={task.name} completed={task.completed} key={task.id} />
   // use {tasks}  in the render()
   ```
-2. create a Form component, have it return the <form>, replace the form with <Form /> 
-3. create a FilterButton component, have it return the <button>, replace the form with <Form /> 
+2. create a Form component, have it return the `<form>`, replace the form with `<Form />` 
+3. OPTIONAL create a FilterButton component, have it return the `<button>`, replace the buttons with `<FilterButton />`
+4. OPTIONAL  use props.name in Filterbutton `<FilterButton name="blah"/> `
 4. event handling in form `  <form onSubmit={handleSubmit}>` 
   ```
   function Form(props) {
@@ -47,7 +47,6 @@ The above is in the [repo](https://github.com/campbe13/react-starter)
     e.preventDefault()
     alert("hello")   // 1. proof of concept
     props.addTask("addtask hello")  // 2. func from parent
-
   }
   ```   
   5. add func from parent (props.addTask), in App func:
