@@ -5,6 +5,7 @@ function Form(props) {
   function handleSubmit(e) {
     e.preventDefault()
     // props.addTask("hello") // 1. proof of concept
+    // 2. addTask comes from parent
     props.addTask(name)
     setName("")
 

@@ -6,7 +6,7 @@ import App from './App';
 const DATA = [
   { id: "todo-0", name: "Code", completed: true },
   { id: "todo-1", name: "Sleep", completed: false },
-  { id: "todo-2", name: "Code More", completed: false }
+  { id: "todo-2", name: "Debug", completed: false }
 ];
 
 

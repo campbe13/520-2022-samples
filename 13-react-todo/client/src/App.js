@@ -6,9 +6,10 @@ import Todo from './components/Todo'
 
 function App(props) {
   const [tasks, setTasks] = useState(props.tasks);
-  
+
   function addTask(name) {
     //alert(name)  // 1. proof of concept
+    // note id/key needs to be unique, can use 
     const newTask = { id: "new id", name, completed: false };
     setTasks([...tasks, newTask]);
   }
